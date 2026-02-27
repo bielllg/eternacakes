@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EternaCakes | Confeitaria Artesanal</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --rosa-claro: #f8e0e5;
+            --rose: #c76868;
+            --bege: #FDF5E6;
+            --vinho: #800020;
+            --branco: #FFFFFF;
+            --texto: #383636;
+            --sombra: rgba(128, 0, 32, 0.1);
+        }
+
+        /* RESET E GERAL */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--texto);
+            background-color: var(--branco);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        .logo {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* HEADER */
+        .header {
+            background: var(--branco);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--sombra);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 70px;
+            /* Adjust height as needed */
+            width: auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--vinho);
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--rose);
+        }
+
+        .cart-icon {
+            cursor: pointer;
+            background: var(--rosa-claro);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        /* HERO */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(135deg, var(--rosa-claro) 0%, var(--bege) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* ANIMATED BACKGROUND ICONS */
+        .bg-animations {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .bg-icon-wrapper {
+            position: absolute;
+            pointer-events: none;
+            transition: transform 0.1s linear;
+        }
+
+        .bg-icon {
+            opacity: 0.25;
+            animation: floatAnim 6s infinite ease-in-out alternate;
+        }
+
+        @keyframes floatAnim {
+            0% {
+                transform: translateY(0px) rotate(-10deg);
+            }
+
+            50% {
+                transform: translateY(-40px) translateX(20px) rotate(15deg);
+            }
+
+            100% {
+                transform: translateY(-80px) translateX(-20px) rotate(35deg);
+            }
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            color: var(--vinho);
+        }
+
+        .hero h2 {
+            color: var(--rose);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        /* SOBRE NÓS */
+        .about {
+            padding: 80px 0;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-image-placeholder {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background: var(--bege);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: var(--rose);
+            border: 2px dashed var(--rose);
+        }
+
+        /* PRODUTOS E CARDS */
+        .products {
+            padding: 80px 0;
+            background-color: var(--rosa-claro);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 22px;
+            border: 1px solid var(--rose);
+            background: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .filter-btn.active {
+            background: var(--vinho);
+            color: white;
+            border-color: var(--vinho);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        /* ESTILO DO CARD COM FOTO */
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            /* Para a imagem respeitar as bordas arredondadas */
+            box-shadow: 0 10px 20px var(--sombra);
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 220px;
+            background-color: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Faz a foto preencher o espaço sem distorcer */
+            transition: 0.5s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-info h3 {
+            color: var(--vinho);
+            margin-bottom: 5px;
+        }
+
+        .product-info p {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--vinho);
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        /* CARRINHO SIDEBAR */
+        .cart-sidebar {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 350px;
+            height: 100%;
+            background: white;
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+            z-index: 2000;
+            transition: 0.4s;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        /* CONTATO */
+        .contact {
+            padding: 80px 0;
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 15px;
+            border: 1px solid var(--rose);
+            border-radius: 10px;
+        }
+
+        /* BOTÕES */
+        .btn {
+            padding: 12px 25px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--vinho);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--vinho);
+            border: 1px solid var(--vinho);
+        }
+
+        .w-100 {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        /* Estilo dos Ícones Sociais */
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: 0.3s;
+        }
+
+        /* Cores Oficiais */
+        .instagram {
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+        }
+
+        .whatsapp {
+            background-color: #25D366;
+        }
+
+        .ifood {
+            background-color: #ea1d2c;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px);
+            opacity: 0.8;
+        }
+
+        .social-icon i {
+            font-size: 1.4rem;
+        }
+
+
+
+        /* NOVA SEÇÃO: TABELA DE PREÇOS (Imagem enviada) */
+        .cake-sizes {
+            padding: 60px 0;
+            background: #ffffff;
+            text-align: center;
+        }
+
+        .cake-sizes h2 {
+            color: var(--vinho);
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+
+        .cake-sizes h3 {
+            color: var(--rosa-tabela);
+            font-size: 3rem;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        .price-table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: var(--rosa-claro);
+            border: 2px solid #000;
+        }
+
+        .price-table th,
+        .price-table td {
+            border: 1px solid #000;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .price-table th {
+            color: var(--rosa-tabela);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            background-color: #ff92928e;
+        }
+
+        .price-table tr:nth-child(even) {
+            background-color: #fff;
+        }
+
+        .price-table td {
+            color: #000;
+        }
+
+
+
+        /* SEÇÃO CONTATO REESTILIZADA */
+        .contact {
+            padding: 80px 0;
+            background-color: #fff;
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        /* Container dos Cards da Imagem */
+        .contato-info-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contato-card {
+            background: #FFFFFF;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            border: 1px solid #f5f5f5;
+        }
+
+        .contato-icon-circle {
+            width: 45px;
+            height: 45px;
+            background-color: #FFF0F3;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contato-icon-circle i {
+            color: #A04C5A;
+            font-size: 1.1rem;
+        }
+
+        .contato-details h4 {
+            font-size: 1.05rem;
+            color: #4A2C2A;
+            margin-bottom: 2px;
+        }
+
+        .contato-details p {
+            font-size: 0.85rem;
+            color: #7A6360;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        /* Ajuste das Redes Sociais abaixo dos cards */
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+            justify-content: flex-start;
+        }
+
+        @media (max-width: 768px) {
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+
+
+        /* ESTILO PARA RECHEIOS E ADICIONAIS */
+        .extras-section {
+            padding: 40px 0;
+            background-color: #fff;
+        }
+
+        .extras-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+            border: 2px solid var(--vinho);
+            border-radius: 20px;
+            padding: 30px;
+            background-color: var(--rosa-claro);
+        }
+
+        .extra-item {
+            margin-bottom: 25px;
+        }
+
+        .extra-item h3 {
+            color: var(--vinho);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        .extra-item h3 i {
+            color: #ff8da1;
+            /* Cor rosa do coração da imagem */
+            font-size: 1.2rem;
+        }
+
+        .extra-item p {
+            color: var(--texto);
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        .extra-price {
+            font-weight: bold;
+            color: var(--vinho);
+        }
+
+
+
+
+
+
+        .select-estilo {
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid var(--rose);
+            background-color: #fff;
+            color: var(--vinho);
+            font-family: 'Poppins', sans-serif;
+            outline: none;
+        }
+
+        .opcoes-bolo label {
+            display: block;
+            margin-bottom: 2px;
+            color: var(--vinho);
+            font-weight: 600;
+        }
+
+
+
+
+        /* Estilo para os menus de Recheios e Adicionais no Card */
+        .opcoes-bolo {
+            margin: 10px 0;
+            text-align: left;
+        }
+
+        .opcoes-bolo label {
+            display: block;
+            margin-top: 8px;
+            margin-bottom: 2px;
+            color: var(--vinho);
+            font-weight: 600;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+        }
+
+        .select-estilo {
+            width: 100%;
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid var(--rose);
+            background-color: #fff;
+            color: var(--vinho);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            outline: none;
+        }
+
+        /* CARD DESTAQUE - BOLO PERSONALIZADO */
+        .product-card.card-destaque {
+            grid-column: 1 / -1;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .product-card.card-destaque .product-image {
+            height: 320px;
+        }
+
+        .product-card.card-destaque .product-info h3 {
+            font-size: 1.4rem;
+        }
+
+        /* Upload de foto de referência */
+        .foto-upload-area {
+            border: 2px dashed var(--rose);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            background: #fff9fa;
+            margin-top: 5px;
+        }
+
+        .foto-upload-area:hover {
+            border-color: var(--vinho);
+            background: #fff0f3;
+        }
+
+        .foto-upload-area i {
+            font-size: 2rem;
+            color: var(--rose);
+        }
+
+        .foto-upload-area p {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .foto-preview {
+            max-width: 100%;
+            max-height: 150px;
+            border-radius: 10px;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="container nav">
+            <div class="logo">
+                <img src="img.img/logo.png" alt="EternaCakes">
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#produtos">Produtos</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+            <div class="cart-icon" onclick="toggleCart()">🛒 <span id="cart-count">0</span></div>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="bg-animations" id="bg-animations"></div>
+        <div class="hero-content">
+            <h2>Confeitaria Artesanal</h2>
+            <h1>EternaCakes</h1>
+            <p>Feito à mão, com amor e os melhores ingredientes.</p>
+            <div style="margin-top: 20px;">
+                <a href="#produtos" class="btn btn-primary">Ver Cardápio</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="about container" id="sobre">
+        <div class="about-content">
+            <div class="about-image-placehder"></div>
+            <div class="about-text">
+                <h1>Nossa História</h1>
+                <p>Você acredita que eu entrei na confeitaria sem saber fazer nem um bolo com massa pronta? 🍰
+                </p>
+                <br>
+                <p>Entrei para me desafiar. Queria provar para mim mesma que eu era capaz de aprender algo novo, mesmo
+                    começando do zero. No início, foi tudo muito simples — e difícil também. Teve insegurança, teve
+                    erros, teve dias em que pensei que não conseguiria. Mas também teve muita determinação. 🍰✨
+                    <br>
+                    Com o tempo, a vida me trouxe um novo propósito. Minha mãe, que já é idosa e mora comigo, passou a
+                    precisar mais de mim. Eu precisava estar presente, cuidar dela e acompanhar de perto essa fase da
+                    vida dela. Foi então que tomei uma decisão importante: saí da empresa onde trabalhava e resolvi me
+                    dedicar totalmente aos meus bolos.
+                </p>
+                <br>
+
+                <p>Comecei fazendo bolos caseiros. Um pedido aqui, outro ali. Cada encomenda era feita com carinho e
+                    com a esperança de que desse certo. Aos poucos, os bolos decorados começaram a surgir, os pedidos
+                    aumentaram e a confiança também.
+                </p>
+                <br>
+                <p>
+                    O que começou como um desafio virou paixão. E a paixão virou propósito.
+
+                    Hoje, a confeitaria não é apenas uma fonte de renda. É meu sonho, meu projeto de vida. É a prova de
+                    que recomeçar pode ser assustador, mas também pode ser a melhor escolha que a gente faz.
+
+                    E pensar que tudo começou com alguém que não sabia nem fazer um bolo de massa pronta… 💕
+                    <a href="#contato" class="btn btn-secondary">Saiba Mais</a>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="cake-sizes container">
+        <h2>Bolos</h2>
+        <h3>Tradicionais e personalizados</h3>
+        <div class="table-container">
+            <table class="price-table">
+                <thead>
+                    <tr>
+                        <th>Tamanhos</th>
+                        <th>Quantidade de Fatias</th>
+                        <th>Preços</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>10 CM</td>
+                        <td>10 FATIAS</td>
+                        <td>R$ 110,00</td>
+                    </tr>
+                    <tr>
+                        <td>15 CM</td>
+                        <td>15 FATIAS</td>
+                        <td>R$ 130,00</td>
+                    </tr>
+                    <tr>
+                        <td>20 CM</td>
+                        <td>25 FATIAS</td>
+                        <td>R$ 190,00</td>
+                    </tr>
+                    <tr>
+                        <td>25 CM</td>
+                        <td>37 FATIAS</td>
+                        <td>R$ 225,00</td>
+                    </tr>
+                    <tr>
+                        <td>30 CM</td>
+                        <td>56 FATIAS</td>
+                        <td>R$ 295,00</td>
+                    </tr>
+                    <tr>
+                        <td>35 CM</td>
+                        <td>80 FATIAS</td>
+                        <td>R$ 330,00</td>
+                    </tr>
+                    <tr>
+                        <td>40 CM</td>
+                        <td>100 FATIAS</td>
+                        <td>R$ 490,00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <section class="extras-section container">
+            <div class="extras-container">
+                <div class="extra-item">
+                    <h3><i class="fas fa-heart"></i> Massas disponíveis</h3>
+                    <p>Pão de ló, Pão de ló de chocolate, Chifron, Chifron de chocolate.</p>
+                </div>
+
+                <div class="extra-item">
+                    <h3><i class="fas fa-heart"></i> Recheios disponíveis</h3>
+                    <p>Mousse trufado de chocolate, Mousse trufado de maracujá, Creme 4 leites, Sonho de valsa, Mousse
+                        de morango, Doce de leite, Mousse de chocolate, Ninho, Chocolate 50%.</p>
+                </div>
+
+                <div class="extra-item">
+                    <h3><i class="fas fa-heart"></i> Acréscimos (varia por tamanho)</h3>
+                    <p>Nutella, Morango, Chocolate branco, Flores naturais, Topo de bolo.</p>
+                </div>
+            </div>
+        </section>
+
+
+    </section>
+
+
+
+    <section class="products" id="produtos">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossas Delícias</h2>
+                <p>Escolha o seu favorito</p>
+            </div>
+
+            <div class="filters">
+                <button class="filter-btn active" data-filter="todos">Todos</button>
+                <button class="filter-btn" data-filter="bolos">Bolos personalizado</button>
+                <button class="filter-btn" data-filter="tra">Bolos tradicionais</button>
+                <button class="filter-btn" data-filter="vulcao">Bolos Vulcão</button>
+                <button class="filter-btn" data-filter="cobertura">Bolo com Cobertura</button>
+                <button class="filter-btn" data-filter="doces">Doces</button>
+                <button class="filter-btn" data-filter="pascoa">Ovos de Páscoa</button>
+            </div>
+
+            <div class="product-grid" id="product-grid">
+            </div>
+        </div>
+    </section>
+
+    <aside class="cart-sidebar" id="cart-sidebar">
+        <h3>Seu Carrinho</h3>
+        <div id="cart-items" style="flex:1; overflow-y:auto; margin: 20px 0;"></div>
+        <div class="total" style="font-weight:bold; display:flex; justify-content:space-between; margin-bottom:20px;">
+            <span>Total:</span>
+            <span id="cart-total">R$ 0,00</span>
+        </div>
+        <button class="btn btn-primary w-100" onclick="finalizarPedido()">Finalizar no WhatsApp</button>
+        <button class="btn btn-secondary w-100" style="margin-top:10px" onclick="toggleCart()">Fechar</button>
+    </aside>
+
+    <section class="contact container" id="contato">
+        <div class="section-title">
+            <h1>Contato</h1>
+            <p>Fale conosco ou venha nos visitar</p>
+        </div>
+
+        <div class="contact-wrapper">
+            <div class="contato-info-container">
+
+                <div class="contato-card">
+                    <div class="contato-icon-circle"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="contato-details">
+                        <h4>Endereço</h4>
+                        <p>... - ..., MG</p>
+                    </div>
+                </div>
+
+                <div class="contato-card">
+                    <div class="contato-icon-circle"><i class="fas fa-phone-alt"></i></div>
+                    <div class="contato-details">
+                        <h4>Telefone / WhatsApp</h4>
+                        <p>(31) 8025-4312</p>
+                    </div>
+                </div>
+
+                <div class="contato-card">
+                    <div class="contato-icon-circle"><i class="far fa-clock"></i></div>
+                    <div class="contato-details">
+                        <h4>Horário de Funcionamento</h4>
+                        <p>Terça a Sexta: 8h às 20h<br>Sábado e Domingo: 9h às 14h</p>
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <a href="#" target="_blank" class="social-icon instagram" title="Instagram"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/553180254312" target="_blank" class="social-icon whatsapp"
+                        title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" target="_blank" class="social-icon ifood" title="iFood"><i
+                            class="fas fa-utensils"></i></a>
+                </div>
+            </div>
+
+            <section class="about container" id="sobre">
+                <div class="about-content">
+                    <div class="about-image-placehder"></div>
+                    <div class="about-text">
+                        <h2>obrigado por comprar </h2>
+                        <p> Obrigado por adoçar sua vida com a gente 🍰✨
+                            Seu doce foi feito com ingredientes selecionados, amor e muito sabor. Esperamos te ver
+                            novamente em breve!
+                            <br>
+                            <br>
+                        <p>Na sua próxima compra, ganhe desconto especial como forma de agradecimento. Esperamos você!
+                        </p>
+
+                    </div>
+                </div>
+            </section>
+
+
+
+
+    </section>
+
+    <footer style="text-align:center; padding:20px 0; background: var(--rosa-claro); margin-top:40px;">
+        <p>&copy; 2026 EternaCakes. Todos os direitos reservados.</p>
+
+        <script>
+            // Seus dados de tamanhos para a categoria bolos
+            // Dados exatos da imagem
+            const bolos = [
+                { label: "10 CM (10 FATIAS)", preco: 110.00 },
+                { label: "15 CM (15 FATIAS)", preco: 130.00 },
+                { label: "20 CM (25 FATIAS)", preco: 190.00 },
+                { label: "25 CM (37 FATIAS)", preco: 225.00 },
+                { label: "30 CM (56 FATIAS)", preco: 295.00 },
+                { label: "35 CM (80 FATIAS)", preco: 330.00 },
+                { label: "40 CM (100 FATIAS)", preco: 490.00 }
+            ];
+
+            const recheios = [
+                "Mousse trufado de chocolate", "Mousse trufado de maracujá", "Creme 4 leites",
+                "Sonho de valsa", "Mousse de morango", "Doce de leite", "Mousse de chocolate",
+                "Ninho", "Chocolate 50%"
+            ];
+
+            const massas = [
+                "Pão de ló", "Pão de ló (Chocolate)", "Chifron", "Chifron (Chocolate)"
+            ];
+
+            const adicionaisPorTamanho = {
+                0: [ // 10 cm
+                    { nome: "Nenhum", preco: 0 },
+                    { nome: "Nutella", preco: 5.00 },
+                    { nome: "Morango", preco: 6.00 },
+                    { nome: "Chocolate branco", preco: 5.00 },
+                    { nome: "Flores naturais", preco: 15.00 },
+                    { nome: "Topo", preco: 16.00 }
+                ],
+                1: [ // 15 cm
+                    { nome: "Nenhum", preco: 0 },
+                    { nome: "Nutella", preco: 10.00 },
+                    { nome: "Morango", preco: 8.00 },
+                    { nome: "Chocolate branco", preco: 12.00 },
+                    { nome: "Flores naturais", preco: 25.00 },
+                    { nome: "Topo", preco: 20.00 }
+                ],
+                2: [ // 20 cm e maiores
+                    { nome: "Nenhum", preco: 0 },
+                    { nome: "Nutella", preco: 15.00 },
+                    { nome: "Morango", preco: 12.00 },
+                    { nome: "Chocolate branco", preco: 18.00 },
+                    { nome: "Flores naturais", preco: 21.00 },
+                    { nome: "Topo", preco: 20.00 }
+                ]
+            };
+
+            function getAdicionaisList(tamIdx) {
+                return adicionaisPorTamanho[tamIdx] || adicionaisPorTamanho[2];
+            }
+
+            function getAdicionaisOptionsHTML(tamIdx) {
+                const list = getAdicionaisList(tamIdx);
+                return list.map((a, index) => `<option value="${index}">${a.nome} ${a.preco > 0 ? '(+ R$' + a.preco.toFixed(2) + ')' : ''}</option>`).join('');
+            }
+
+            function atualizarAdicionais(id) {
+                const p = produtos.find(x => x.id === id);
+                if (p && (p.categoria === 'bolos' || p.categoria === 'tra' || p.categoria === 'vulcao' || p.categoria === 'cobertura')) {
+                    const selectBolo = document.getElementById(`select-bolo-${id}`);
+                    const tamIdx = selectBolo ? selectBolo.value : 0;
+                    const selectAdd = document.getElementById(`add-${id}`);
+                    if (selectAdd) {
+                        const currentlySelected = selectAdd.selectedIndex;
+                        selectAdd.innerHTML = getAdicionaisOptionsHTML(tamIdx);
+                        if (currentlySelected >= 0 && currentlySelected < selectAdd.options.length) {
+                            selectAdd.selectedIndex = currentlySelected;
+                        } else {
+                            selectAdd.selectedIndex = 0;
+                        }
+                    }
+                }
+            }
+
+            const chantilys = [
+                { nome: "Sem chantily", preco: 0 },
+                { nome: "Chantily branco", preco: 10.00 },
+                { nome: "Chantily de chocolate", preco: 12.00 },
+                { nome: "Chantily de morango", preco: 12.00 },
+                { nome: "Chantily de ninho", preco: 15.00 }
+            ];
+
+            const toposDeBolo = [
+                { nome: "Sem topo", preco: 0 },
+                { nome: "Topo personalizado (acrílico)", preco: 20.00 },
+                { nome: "Topo com nome (papel arroz)", preco: 10.00 },
+                { nome: "Topo com vela", preco: 8.00 },
+                { nome: "Topo com flores", preco: 25.00 }
+            ];
+
+            const produtos = [
+                { id: 70, nome: "🎂 Monte seu Bolo Personalizado", categoria: "bolos", preco: 110.00, foto: "img.img/bolo_personalizado.png", desc: "Escolha cada detalhe do seu bolo dos sonhos! Envie uma foto de referência.", personalizado: true },
+
+                { id: 19, nome: "escolha seu bolo", categoria: "tra", preco: 110.00, foto: "img.img/perso.png", desc: "escolha seu tipo de bolo." },
+                { id: 20, nome: "Bolo de chocolate", categoria: "tra", preco: 110.00, foto: "img.img/bochoco.png", desc: "O clássico com calda de chocolate." },
+                { id: 21, nome: "Bolo de morango", categoria: "tra", preco: 110.00, foto: "img.img/bomirango.png", desc: "morango muito bom." },
+                { id: 22, nome: "Bolo de coco", categoria: "tra", preco: 110.00, foto: "img.img/coc.png", desc: "O clássico com calda de chocolate." },
+                { id: 24, nome: "1 pedaço de bolo de cenoura", categoria: "tra", preco: 110.00, foto: "img.img/1 peda.png", desc: "1 pedaço de infancia." },
+                { id: 25, nome: "Bolo de 2 sabores", categoria: "tra", preco: 110.00, foto: "img.img/2 sabor.png", desc: "2 mundo." },
+                { id: 26, nome: "Bolo de Cenoura", categoria: "tra", preco: 110.00, foto: "img.img/ceno.png", desc: "bolo da infancia." },
+
+                { id: 30, nome: "Bolo Vulcão Cenoura", categoria: "vulcao", preco: 40.00, foto: "img.img/perso.png", desc: "Bolo vulcão delicioso." },
+                { id: 31, nome: "Bolo Vulcão Fubá", categoria: "vulcao", preco: 40.00, foto: "img.img/perso.png", desc: "Bolo vulcão delicioso." },
+                { id: 32, nome: "Bolo Vulcão Ninho", categoria: "vulcao", preco: 40.00, foto: "img.img/perso.png", desc: "Bolo vulcão delicioso." },
+                { id: 33, nome: "Bolo Vulcão Chocolate", categoria: "vulcao", preco: 40.00, foto: "img.img/perso.png", desc: "Bolo vulcão delicioso." },
+                { id: 34, nome: "Bolo Vulcão Coco", categoria: "vulcao", preco: 40.00, foto: "img.img/perso.png", desc: "Bolo vulcão delicioso." },
+                { id: 35, nome: "Bolo Vulcão Paçoca", categoria: "vulcao", preco: 40.00, foto: "img.img/perso.png", desc: "Bolo vulcão delicioso." },
+
+                { id: 40, nome: "Bolo Cobertura Cenoura", categoria: "cobertura", preco: 25.00, foto: "img.img/perso.png", desc: "Bolo com cobertura." },
+                { id: 41, nome: "Bolo Cobertura Fubá", categoria: "cobertura", preco: 25.00, foto: "img.img/perso.png", desc: "Bolo com cobertura." },
+                { id: 42, nome: "Bolo Cobertura Ninho", categoria: "cobertura", preco: 25.00, foto: "img.img/perso.png", desc: "Bolo com cobertura." },
+                { id: 43, nome: "Bolo Cobertura Chocolate", categoria: "cobertura", preco: 25.00, foto: "img.img/perso.png", desc: "Bolo com cobertura." },
+                { id: 44, nome: "Bolo Cobertura Coco", categoria: "cobertura", preco: 25.00, foto: "img.img/perso.png", desc: "Bolo com cobertura." },
+                { id: 45, nome: "Bolo Cobertura Paçoca", categoria: "cobertura", preco: 25.00, foto: "img.img/perso.png", desc: "Bolo com cobertura." },
+
+                { id: 50, nome: "Cento Docinho Brigadeiro", categoria: "doces", preco: 100.00, foto: "img.img/briga.png", desc: "100 unidades." },
+                { id: 51, nome: "Cento Docinho Beijinho", categoria: "doces", preco: 100.00, foto: "img.img/beijinho.png", desc: "100 unidades." },
+                { id: 52, nome: "Cento Docinho Moranguinho", categoria: "doces", preco: 100.00, foto: "img.img/perso.png", desc: "100 unidades." },
+                { id: 53, nome: "Cento Docinho Cajuzinho", categoria: "doces", preco: 100.00, foto: "img.img/perso.png", desc: "100 unidades." },
+
+                { id: 60, nome: "Ovo de Páscoa Tradicional", categoria: "pascoa", preco: 45.00, foto: "img.img/perso.png", desc: "Ovo de chocolate ao leite clássico." },
+                { id: 61, nome: "Ovo de Colher", categoria: "pascoa", preco: 75.00, foto: "img.img/perso.png", desc: "Muito recheio para comer de colher." },
+                { id: 62, nome: "Ovo Trufado", categoria: "pascoa", preco: 85.00, foto: "img.img/perso.png", desc: "Delicioso ovo trufado por inteiro." },
+
+            ];
+            let carrinho = JSON.parse(localStorage.getItem('carrinho_doce')) || [];
+
+            function renderProdutos(filtro = 'todos') {
+                const grid = document.getElementById('product-grid');
+                if (!grid) return;
+                grid.innerHTML = '';
+
+                const filtrados = filtro === 'todos' ? produtos : produtos.filter(p => p.categoria === filtro);
+
+                filtrados.forEach(p => {
+                    const imgTag = p.foto ? `<img src="${p.foto}" alt="${p.nome}">` : `<span style="font-size:3rem; opacity:0.2">📸</span>`;
+
+                    let seletorHTML = '';
+                    let precoHTML = `R$ ${p.preco.toFixed(2)}`;
+
+                    if (p.categoria === 'bolos' || p.categoria === 'tra') {
+                        let extrasHTML = '';
+                        if (p.personalizado) {
+                            extrasHTML = `
+                    <label>CHANTILY:</label>
+                    <select id="chantily-${p.id}" class="select-estilo" onchange="atualizarPrecoCard(${p.id})">
+                        ${chantilys.map((c, i) => `<option value="${i}">${c.nome} ${c.preco > 0 ? '(+ R$' + c.preco.toFixed(2) + ')' : ''}</option>`).join('')}
+                    </select>
+                    <label>TOPO DE BOLO:</label>
+                    <select id="topo-${p.id}" class="select-estilo" onchange="atualizarPrecoCard(${p.id})">
+                        ${toposDeBolo.map((t, i) => `<option value="${i}">${t.nome} ${t.preco > 0 ? '(+ R$' + t.preco.toFixed(2) + ')' : ''}</option>`).join('')}
+                    </select>
+                    <label>📸 FOTO DE REFERÊNCIA:</label>
+                    <div class="foto-upload-area" onclick="document.getElementById('foto-ref-${p.id}').click()">
+                        <i class="fas fa-camera"></i>
+                        <p>Clique para anexar uma foto de referência</p>
+                        <input type="file" id="foto-ref-${p.id}" accept="image/*" style="display:none" onchange="previewFoto(${p.id}, this)">
+                        <img id="foto-preview-${p.id}" class="foto-preview" alt="Preview">
+                    </div>
+                    <label>OBSERVAÇÃO:</label>
+                    <textarea id="comentario-${p.id}" class="select-estilo" rows="2" placeholder="Descreva como deseja seu bolo..."></textarea>
+                    `;
+                        }
+                        seletorHTML = `
+                <div class="opcoes-bolo">
+                    <label>TAMANHO:</label>
+                    <select id="select-bolo-${p.id}" class="select-estilo" onchange="atualizarAdicionais(${p.id}); atualizarPrecoCard(${p.id})">
+                        ${bolos.map((b, index) => `<option value="${index}">${b.label}</option>`).join('')}
+                    </select>
+                    <label>MASSA:</label>
+                    <select id="massa-${p.id}" class="select-estilo">
+                        ${massas.map(m => `<option value="${m}">${m}</option>`).join('')}
+                    </select>
+                    <label>RECHEIO:</label>
+                    <select id="rec-${p.id}" class="select-estilo">
+                        ${recheios.map(r => `<option value="${r}">${r}</option>`).join('')}
+                    </select>
+                    <label>ADICIONAL:</label>
+                    <select id="add-${p.id}" class="select-estilo" onchange="atualizarPrecoCard(${p.id})">
+                        ${getAdicionaisOptionsHTML(0)}
+                    </select>
+                    ${extrasHTML}
+                </div>
+            `;
+                        precoHTML = `<span id="preco-card-${p.id}">R$ ${bolos[0].preco.toFixed(2)}</span>`;
+                    }
+
+                    const cardClass = p.personalizado ? 'product-card card-destaque' : 'product-card';
+                    grid.innerHTML += `
+            <div class="${cardClass}">
+                <div class="product-image">${imgTag}</div>
+                <div class="product-info">
+                    <h3>${p.nome}</h3>
+                    <p>${p.desc}</p>
+                    ${seletorHTML}
+                    <span class="price">${precoHTML}</span>
+                    <button class="btn btn-primary w-100" onclick="addCarrinho(${p.id})">Adicionar</button>
+                </div>
+            </div>
+        `;
+                });
+            }
+
+            function atualizarPrecoCard(id) {
+                const p = produtos.find(x => x.id === id);
+                if (p && (p.categoria === 'bolos' || p.categoria === 'tra')) {
+                    const selectBolo = document.getElementById(`select-bolo-${id}`);
+                    const tamIdx = selectBolo ? selectBolo.value : 0;
+                    const selectAdd = document.getElementById(`add-${id}`);
+                    const addIdx = selectAdd ? selectAdd.value : 0;
+
+                    const listAdd = getAdicionaisList(tamIdx);
+                    const addPreco = listAdd[addIdx] ? listAdd[addIdx].preco : 0;
+                    let total = bolos[tamIdx].preco + addPreco;
+
+                    // Extras do bolo personalizado
+                    if (p.personalizado) {
+                        const selChantily = document.getElementById(`chantily-${id}`);
+                        const chantilyIdx = selChantily ? selChantily.value : 0;
+                        total += chantilys[chantilyIdx] ? chantilys[chantilyIdx].preco : 0;
+
+                        const selTopo = document.getElementById(`topo-${id}`);
+                        const topoIdx = selTopo ? selTopo.value : 0;
+                        total += toposDeBolo[topoIdx] ? toposDeBolo[topoIdx].preco : 0;
+                    }
+
+                    document.getElementById(`preco-card-${id}`).innerText = `R$ ${total.toFixed(2)}`;
+                }
+            }
+
+            // Armazena fotos base64 separadamente (não vai para localStorage)
+            let fotosReferencia = {};
+
+            function addCarrinho(id) {
+                const prodOriginal = produtos.find(p => p.id === id);
+                if (!prodOriginal) return;
+
+                let item = { ...prodOriginal };
+
+                if (item.categoria === 'bolos' || item.categoria === 'tra') {
+                    const selectBolo = document.getElementById(`select-bolo-${id}`);
+                    const tamIdx = selectBolo ? selectBolo.value : 0;
+                    const selectRec = document.getElementById(`rec-${id}`);
+                    const recVal = selectRec ? selectRec.value : 'Nenhum';
+                    const selectMassa = document.getElementById(`massa-${id}`);
+                    const massaVal = selectMassa ? selectMassa.value : 'Nenhum';
+                    const selectAdd = document.getElementById(`add-${id}`);
+                    const addIdx = selectAdd ? selectAdd.value : 0;
+
+                    const listAdd = getAdicionaisList(tamIdx);
+                    const addPreco = listAdd[addIdx] ? listAdd[addIdx].preco : 0;
+
+                    item.preco = bolos[tamIdx].preco + addPreco;
+                    let detalhes = `Tam: ${bolos[tamIdx].label} | Massa: ${massaVal} | Rech: ${recVal} | Add: ${listAdd[addIdx] ? listAdd[addIdx].nome : 'Nenhum'}`;
+
+                    // Extras do bolo personalizado
+                    if (prodOriginal.personalizado) {
+                        const selChantily = document.getElementById(`chantily-${id}`);
+                        const chantilyIdx = selChantily ? selChantily.value : 0;
+                        const chantilyPreco = chantilys[chantilyIdx] ? chantilys[chantilyIdx].preco : 0;
+                        item.preco += chantilyPreco;
+                        detalhes += ` | Chantily: ${chantilys[chantilyIdx] ? chantilys[chantilyIdx].nome : 'Sem'}`;
+
+                        const selTopo = document.getElementById(`topo-${id}`);
+                        const topoIdx = selTopo ? selTopo.value : 0;
+                        const topoPreco = toposDeBolo[topoIdx] ? toposDeBolo[topoIdx].preco : 0;
+                        item.preco += topoPreco;
+                        detalhes += ` | Topo: ${toposDeBolo[topoIdx] ? toposDeBolo[topoIdx].nome : 'Sem'}`;
+
+                        const comentario = document.getElementById(`comentario-${id}`);
+                        const comentarioVal = comentario ? comentario.value.trim() : '';
+                        if (comentarioVal) {
+                            detalhes += ` | Obs: ${comentarioVal}`;
+                        }
+
+                        const fotoInput = document.getElementById(`foto-ref-${id}`);
+                        if (fotoInput && fotoInput.files && fotoInput.files.length > 0) {
+                            const preview = document.getElementById(`foto-preview-${id}`);
+                            if (preview && preview.src && preview.src.startsWith('data:')) {
+                                // Guardar base64 fora do carrinho (não salva no localStorage)
+                                const carrinhoIdx = carrinho.length;
+                                fotosReferencia[carrinhoIdx] = preview.src.split(',')[1];
+                            }
+                            item.temFotoRef = true;
+                        }
+                    }
+
+                    item.detalhes = detalhes;
+                    item.nome = item.nome;
+                }
+
+                carrinho.push(item);
+                atualizarCarrinho();
+
+                // Abre o carrinho automaticamente
+                const sidebar = document.getElementById('cart-sidebar');
+                if (sidebar && !sidebar.classList.contains('active')) {
+                    toggleCart();
+                }
+            }
+
+            function atualizarCarrinho() {
+                try { localStorage.setItem('carrinho_doce', JSON.stringify(carrinho)); } catch (e) { }
+                document.getElementById('cart-count').innerText = carrinho.length;
+                const itensDiv = document.getElementById('cart-items');
+                let total = 0;
+                itensDiv.innerHTML = '';
+
+                carrinho.forEach((item, index) => {
+                    total += item.preco;
+                    itensDiv.innerHTML += `
+            <div style="margin-bottom:10px; border-bottom:1px solid #eee; padding-bottom:5px;">
+                <div style="display:flex; justify-content:space-between; font-size:0.9rem;">
+                    <strong>${item.nome}</strong>
+                    <span>R$ ${item.preco.toFixed(2)} <button onclick="remover(${index})" style="color:red; border:none; background:none; cursor:pointer;">X</button></span>
+                </div>
+                ${item.detalhes ? `<div style="font-size:0.75rem; color:#666;">${item.detalhes}</div>` : ''}
+            </div>`;
+                });
+                document.getElementById('cart-total').innerText = `R$ ${total.toFixed(2)}`;
+            }
+
+            function remover(index) {
+                carrinho.splice(index, 1);
+                // Reindexar fotos de referência
+                const novasFotos = {};
+                Object.keys(fotosReferencia).forEach(k => {
+                    const ki = parseInt(k);
+                    if (ki < index) novasFotos[ki] = fotosReferencia[ki];
+                    else if (ki > index) novasFotos[ki - 1] = fotosReferencia[ki];
+                });
+                fotosReferencia = novasFotos;
+                atualizarCarrinho();
+            }
+
+            function toggleCart() {
+                document.getElementById('cart-sidebar').classList.toggle('active');
+            }
+
+            function previewFoto(id, input) {
+                const preview = document.getElementById(`foto-preview-${id}`);
+                const area = input.closest('.foto-upload-area');
+                if (input.files && input.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        preview.src = e.target.result;
+                        preview.style.display = 'block';
+                        area.querySelector('i').style.display = 'none';
+                        area.querySelector('p').innerText = '✅ Foto anexada! Clique para trocar.';
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            async function uploadImgBB(base64) {
+                const formData = new FormData();
+                formData.append('key', 'd7cdaf8611164a278c59a2abaf65cec7');
+                formData.append('image', base64);
+                try {
+                    const resp = await fetch('https://api.imgbb.com/1/upload', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const data = await resp.json();
+                    if (data.success) return data.data.url;
+                } catch (e) {
+                    console.error('Erro ao enviar imagem:', e);
+                }
+                return null;
+            }
+
+            // Converte base64 em File para a Web Share API
+            function base64ToFile(base64, filename) {
+                const byteString = atob(base64);
+                const ab = new ArrayBuffer(byteString.length);
+                const ia = new Uint8Array(ab);
+                for (let i = 0; i < byteString.length; i++) {
+                    ia[i] = byteString.charCodeAt(i);
+                }
+                return new File([ab], filename, { type: 'image/jpeg' });
+            }
+
+            async function finalizarPedido() {
+                if (carrinho.length === 0) return alert("Carrinho vazio!");
+
+                let texto = "🧁 *Novo Pedido - EternaCakes*\n\n";
+                carrinho.forEach(item => {
+                    texto += `• *${item.nome}*\n${item.detalhes ? '  ' + item.detalhes + '\n' : ''}  Preço: R$ ${item.preco.toFixed(2)}\n\n`;
+                });
+                texto += `*Total: ${document.getElementById('cart-total').innerText}*`;
+
+                // Verificar se tem foto de referência
+                let fotoBase64 = null;
+                for (let i = 0; i < carrinho.length; i++) {
+                    if (carrinho[i].temFotoRef && fotosReferencia[i]) {
+                        fotoBase64 = fotosReferencia[i];
+                        break;
+                    }
+                }
+
+                // Tentar Web Share API (funciona no celular — envia a foto direto!)
+                if (fotoBase64 && navigator.canShare) {
+                    try {
+                        const file = base64ToFile(fotoBase64, 'referencia-bolo.jpg');
+                        const shareData = {
+                            text: texto,
+                            files: [file]
+                        };
+                        if (navigator.canShare(shareData)) {
+                            const btn = document.querySelector('.btn-primary.w-100[onclick="finalizarPedido()"]');
+                            if (btn) {
+                                btn.innerText = '📸 Preparando...';
+                                btn.disabled = true;
+                            }
+                            await navigator.share(shareData);
+                            if (btn) {
+                                btn.innerText = 'Finalizar no WhatsApp';
+                                btn.disabled = false;
+                            }
+                            return; // Compartilhou com sucesso, não precisa do fallback
+                        }
+                    } catch (e) {
+                        // Usuário cancelou ou erro — continuar com fallback
+                        console.log('Web Share cancelado ou não suportado, usando fallback.');
+                        const btn = document.querySelector('.btn-primary.w-100[onclick="finalizarPedido()"]');
+                        if (btn) {
+                            btn.innerText = 'Finalizar no WhatsApp';
+                            btn.disabled = false;
+                        }
+                    }
+                }
+
+                // Fallback: Upload para ImgBB + link no WhatsApp
+                if (fotoBase64) {
+                    const btn = document.querySelector('.btn-primary.w-100[onclick="finalizarPedido()"]');
+                    if (btn) {
+                        btn.innerText = '📸 Enviando foto...';
+                        btn.disabled = true;
+                    }
+                    const fotoUrl = await uploadImgBB(fotoBase64);
+                    if (btn) {
+                        btn.innerText = 'Finalizar no WhatsApp';
+                        btn.disabled = false;
+                    }
+                    if (fotoUrl) {
+                        texto += `\n\n📸 *Foto de referência do bolo:*\n${fotoUrl}`;
+                    } else {
+                        texto += `\n\n📸 *Envie a foto de referência do bolo nesta conversa!*`;
+                    }
+                }
+
+                window.open(`https://wa.me/553180254312?text=${encodeURIComponent(texto)}`);
+            }
+
+            // Filtros
+            document.addEventListener('click', function (e) {
+                if (e.target.classList.contains('filter-btn')) {
+                    document.querySelector('.filter-btn.active').classList.remove('active');
+                    e.target.classList.add('active');
+                    renderProdutos(e.target.dataset.filter);
+                }
+            });
+
+            function initBgAnimations() {
+                const icons = ['🎂', '🧁', '🍩', '🍫', '🍒', '🥄', '✨'];
+                const bgContainer = document.getElementById('bg-animations');
+                if (!bgContainer) return;
+
+                for (let i = 0; i < 30; i++) {
+                    const wrapper = document.createElement('div');
+                    wrapper.classList.add('bg-icon-wrapper');
+                    wrapper.style.left = `${Math.random() * 100}%`;
+                    wrapper.style.top = `${Math.random() * 100}%`;
+
+                    const icon = document.createElement('div');
+                    icon.classList.add('bg-icon');
+                    icon.innerText = icons[Math.floor(Math.random() * icons.length)];
+                    icon.style.fontSize = `${Math.random() * 2.5 + 1.5}rem`;
+                    icon.style.animationDuration = `${Math.random() * 6 + 5}s`;
+                    icon.style.animationDelay = `${Math.random() * 3}s`;
+
+                    wrapper.appendChild(icon);
+                    bgContainer.appendChild(wrapper);
+                }
+            }
+
+            window.onload = () => { renderProdutos(); atualizarCarrinho(); initBgAnimations(); };
+
+
+            function enviarMensagemContato() {
+                const nome = document.querySelector('input[placeholder="Seu Nome"]').value;
+                const fone = document.querySelector('input[placeholder="Seu WhatsApp"]').value;
+                const msgCli = document.querySelector('textarea').value;
+
+                // SEU NÚMERO AQUI (Exemplo: 55 + DDD + Numero)
+                const seuNumero = "553180254312";
+
+                const textoFinal = `Olá! Meu nome é ${nome}. \nMeu contato: ${fone} \n\n*Mensagem:* ${msgCli}`;
+
+                // Abre o WhatsApp com a mensagem pronta
+                window.open(`https://wa.me/553180254312?text=${encodeURIComponent(textoFinal)}`);
+            }
+        </script>
