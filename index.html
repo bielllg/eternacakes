@@ -873,8 +873,7 @@
 
             <div class="filters">
                 <button class="filter-btn active" data-filter="todos">Todos</button>
-                <button class="filter-btn" data-filter="bolos">Bolos personalizado</button>
-                <button class="filter-btn" data-filter="tra">Bolos tradicionais</button>
+                <button class="filter-btn" data-filter="bolos">Bolos personalizados</button>
                 <button class="filter-btn" data-filter="vulcao">Bolos Vulcão</button>
                 <button class="filter-btn" data-filter="cobertura">Bolo com Cobertura</button>
                 <button class="filter-btn" data-filter="doces">Doces</button>
@@ -931,8 +930,8 @@
                 </div>
 
                 <div class="social-links">
-                    <a href="#" target="_blank" class="social-icon instagram" title="Instagram"><i
-                            class="fab fa-instagram"></i></a>
+                    <a href="https://www.instagram.com/eternacakes" target="_blank" class="social-icon instagram"
+                        title="Instagram"><i class="fab fa-instagram"></i></a>
                     <a href="https://wa.me/553180254312" target="_blank" class="social-icon whatsapp"
                         title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                     <a href="#" target="_blank" class="social-icon ifood" title="iFood"><i
@@ -1043,11 +1042,10 @@
             }
 
             const chantilys = [
-                { nome: "Sem chantily", preco: 0 },
-                { nome: "Chantily branco", preco: 10.00 },
-                { nome: "Chantily de chocolate", preco: 12.00 },
-                { nome: "Chantily de morango", preco: 12.00 },
-                { nome: "Chantily de ninho", preco: 15.00 }
+                { nome: "Sem chantilly", preco: 0 },
+                { nome: "Chantilly", preco: 12.00 },
+                { nome: "Chantininho", preco: 15.00 },
+                { nome: "Ganache", preco: 18.00 }
             ];
 
             const toposDeBolo = [
@@ -1061,38 +1059,73 @@
             const produtos = [
                 { id: 70, nome: "🎂 Monte seu Bolo Personalizado", categoria: "bolos", preco: 110.00, foto: "img.img/bolo_personalizado.png", desc: "Escolha cada detalhe do seu bolo dos sonhos! Envie uma foto de referência.", personalizado: true },
 
-                { id: 19, nome: "escolha seu bolo", categoria: "tra", preco: 110.00, foto: "img.img/perso.png", desc: "escolha seu tipo de bolo." },
-                { id: 20, nome: "Bolo de chocolate", categoria: "tra", preco: 110.00, foto: "img.img/bochoco.png", desc: "O clássico com calda de chocolate." },
-                { id: 21, nome: "Bolo de morango", categoria: "tra", preco: 110.00, foto: "img.img/bomirango.png", desc: "morango muito bom." },
-                { id: 22, nome: "Bolo de coco", categoria: "tra", preco: 110.00, foto: "img.img/coc.png", desc: "O clássico com calda de chocolate." },
-                { id: 24, nome: "1 pedaço de bolo de cenoura", categoria: "tra", preco: 110.00, foto: "img.img/1 peda.png", desc: "1 pedaço de infancia." },
-                { id: 25, nome: "Bolo de 2 sabores", categoria: "tra", preco: 110.00, foto: "img.img/2 sabor.png", desc: "2 mundo." },
-                { id: 26, nome: "Bolo de Cenoura", categoria: "tra", preco: 110.00, foto: "img.img/ceno.png", desc: "bolo da infancia." },
+                { id: 30, nome: "Bolo Vulcão Cenoura", categoria: "vulcao", preco: 40.00, foto: "img.img/Bolo Vulcão Cenoura.jpg", desc: "Bolo vulcão delicioso." },
+                { id: 32, nome: "Bolo Vulcão Ninho", categoria: "vulcao", preco: 40.00, foto: "img.img/Bolo Vulcão Ninho.jpg", desc: "Bolo vulcão delicioso." },
+                { id: 33, nome: "Bolo Vulcão Chocolate", categoria: "vulcao", preco: 40.00, foto: "img.img/Bolo Vulcão Chocolate.jpg", desc: "Bolo vulcão delicioso." },
+                { id: 34, nome: "Bolo Vulcão Coco", categoria: "vulcao", preco: 40.00, foto: "img.img/Bolo Vulcão Coco.jpg", desc: "Bolo vulcão delicioso." },
+                { id: 35, nome: "Bolo Vulcão Paçoca", categoria: "vulcao", preco: 40.00, foto: "img.img/Bolo Vulcão Paçoca.jpg", desc: "Bolo vulcão delicioso." },
 
-                { id: 30, nome: "Bolo Vulcão Cenoura", categoria: "vulcao", preco: 40.00, foto: "img.img/perso.png", desc: "Bolo vulcão delicioso." },
-                { id: 31, nome: "Bolo Vulcão Fubá", categoria: "vulcao", preco: 40.00, foto: "img.img/perso.png", desc: "Bolo vulcão delicioso." },
-                { id: 32, nome: "Bolo Vulcão Ninho", categoria: "vulcao", preco: 40.00, foto: "img.img/perso.png", desc: "Bolo vulcão delicioso." },
-                { id: 33, nome: "Bolo Vulcão Chocolate", categoria: "vulcao", preco: 40.00, foto: "img.img/perso.png", desc: "Bolo vulcão delicioso." },
-                { id: 34, nome: "Bolo Vulcão Coco", categoria: "vulcao", preco: 40.00, foto: "img.img/perso.png", desc: "Bolo vulcão delicioso." },
-                { id: 35, nome: "Bolo Vulcão Paçoca", categoria: "vulcao", preco: 40.00, foto: "img.img/perso.png", desc: "Bolo vulcão delicioso." },
-
-                { id: 40, nome: "Bolo Cobertura Cenoura", categoria: "cobertura", preco: 25.00, foto: "img.img/perso.png", desc: "Bolo com cobertura." },
-                { id: 41, nome: "Bolo Cobertura Fubá", categoria: "cobertura", preco: 25.00, foto: "img.img/perso.png", desc: "Bolo com cobertura." },
-                { id: 42, nome: "Bolo Cobertura Ninho", categoria: "cobertura", preco: 25.00, foto: "img.img/perso.png", desc: "Bolo com cobertura." },
-                { id: 43, nome: "Bolo Cobertura Chocolate", categoria: "cobertura", preco: 25.00, foto: "img.img/perso.png", desc: "Bolo com cobertura." },
-                { id: 44, nome: "Bolo Cobertura Coco", categoria: "cobertura", preco: 25.00, foto: "img.img/perso.png", desc: "Bolo com cobertura." },
-                { id: 45, nome: "Bolo Cobertura Paçoca", categoria: "cobertura", preco: 25.00, foto: "img.img/perso.png", desc: "Bolo com cobertura." },
+                { id: 40, nome: "Bolo Cobertura Cenoura", categoria: "cobertura", preco: 25.00, foto: "img.img/Bolo Cobertura Cenoura.jpg", desc: "Bolo com cobertura." },
+                { id: 43, nome: "Bolo Cobertura Chocolate", categoria: "cobertura", preco: 25.00, foto: "img.img/Bolo Cobertura chococlate.jpg", desc: "Bolo com cobertura." },
+                { id: 44, nome: "Bolo Cobertura Coco", categoria: "cobertura", preco: 25.00, foto: "img.img/Bolo Cobertura Coco.jpg", desc: "Bolo com cobertura." },
 
                 { id: 50, nome: "Cento Docinho Brigadeiro", categoria: "doces", preco: 100.00, foto: "img.img/briga.png", desc: "100 unidades." },
                 { id: 51, nome: "Cento Docinho Beijinho", categoria: "doces", preco: 100.00, foto: "img.img/beijinho.png", desc: "100 unidades." },
-                { id: 52, nome: "Cento Docinho Moranguinho", categoria: "doces", preco: 100.00, foto: "img.img/perso.png", desc: "100 unidades." },
-                { id: 53, nome: "Cento Docinho Cajuzinho", categoria: "doces", preco: 100.00, foto: "img.img/perso.png", desc: "100 unidades." },
+                { id: 52, nome: "Cento Docinho Moranguinho", categoria: "doces", preco: 100.00, foto: "img.img/Cento Docinho Moranguinho.jpg", desc: "100 unidades." },
+                { id: 53, nome: "Cento Docinho Cajuzinho", categoria: "doces", preco: 100.00, foto: "img.img/Cento Docinho Cajuzinho.jpg", desc: "100 unidades." },
 
-                { id: 60, nome: "Ovo de Páscoa Tradicional", categoria: "pascoa", preco: 45.00, foto: "img.img/perso.png", desc: "Ovo de chocolate ao leite clássico." },
-                { id: 61, nome: "Ovo de Colher", categoria: "pascoa", preco: 75.00, foto: "img.img/perso.png", desc: "Muito recheio para comer de colher." },
-                { id: 62, nome: "Ovo Trufado", categoria: "pascoa", preco: 85.00, foto: "img.img/perso.png", desc: "Delicioso ovo trufado por inteiro." },
+                { id: 60, nome: "Ovo Tradicional", categoria: "pascoa", preco: 35.90, foto: "img.img/39bf4afdef86d07154a995c82a131c16.jpg", desc: "Ovo de chocolate clássico.", tipoPascoa: 'tradicional' },
+                { id: 61, nome: "Ovo de Colher", categoria: "pascoa", preco: 28.90, foto: "img.img/343b7bf0b314fdca0b239a1ee506adc5.jpg", desc: "Muito recheio para comer de colher!", tipoPascoa: 'colher' },
+                { id: 62, nome: "Ovo de Fatia 250g", categoria: "pascoa", preco: 95.90, foto: "img.img/926900edfca9b0cbc88ac5927de1aaf7.jpg", desc: " Novidade de 2026! Ovo de fatia 250g.", tipoPascoa: 'fatia' },
 
             ];
+
+            const tamanhosPascoaTradicional = [
+                { label: "150g", preco: 35.90 },
+                { label: "250g", preco: 42.90 },
+                { label: "350g", preco: 53.90 },
+                { label: "500g", preco: 79.90 }
+            ];
+
+            const tamanhosPascoaColher = [
+                { label: "50g", preco: 28.90 },
+                { label: "150g", preco: 39.90 },
+                { label: "250g", preco: 49.90 },
+                { label: "350g", preco: 69.90 }
+            ];
+
+            const saboresPascoa = [
+                "Ninho / Nutella",
+                "Beijinho / brownie",
+                "Maracujá / Morango",
+                "Brigadeiro / Ganache",
+                "Orion e paçoca"
+            ];
+
+            // Mapeamento das fotos para cada sabor de Ovo de Colher
+            const fotosSaboresPascoa = {
+                "Ninho / Nutella": "img.img/343b7bf0b314fdca0b239a1ee506adc5.jpg",
+                "Beijinho / brownie": "img.img/08ca1d51db10d10f585d6bcb62d09922.jpg",
+                "Maracujá / Morango": "img.img/837b7e60662d95666bf4f300c7e4097d.jpg",
+                "Brigadeiro / Ganache": "img.img/5576ad78eb5b7090f21c6e779f1671a8.jpg",
+                "Orion e paçoca": "img.img/d455b20e8b04b62b2ff4d1e6a595492d.jpg"
+            };
+
+            function mudarFotoSaborPascoa(id) {
+                const selectSabor = document.getElementById(`pascoa-sabor-${id}`);
+                const card = selectSabor ? selectSabor.closest('.product-card') : null;
+                const imgProduto = card ? card.querySelector('.product-image img') : null;
+
+                if (selectSabor && imgProduto) {
+                    const saborSelecionado = selectSabor.value;
+                    const novaFotoUrl = fotosSaboresPascoa[saborSelecionado];
+
+                    if (novaFotoUrl) {
+                        imgProduto.src = novaFotoUrl;
+                    }
+                }
+            }
+
             let carrinho = JSON.parse(localStorage.getItem('carrinho_doce')) || [];
 
             function renderProdutos(filtro = 'todos') {
@@ -1103,16 +1136,16 @@
                 const filtrados = filtro === 'todos' ? produtos : produtos.filter(p => p.categoria === filtro);
 
                 filtrados.forEach(p => {
-                    const imgTag = p.foto ? `<img src="${p.foto}" alt="${p.nome}">` : `<span style="font-size:3rem; opacity:0.2">📸</span>`;
+                    const imgTag = p.foto ? `<img src="${p.foto}" alt="${p.nome}" id="img-produto-${p.id}">` : `<span style="font-size:3rem; opacity:0.2">📸</span>`;
 
                     let seletorHTML = '';
                     let precoHTML = `R$ ${p.preco.toFixed(2)}`;
 
-                    if (p.categoria === 'bolos' || p.categoria === 'tra') {
+                    if (p.categoria === 'bolos') {
                         let extrasHTML = '';
                         if (p.personalizado) {
                             extrasHTML = `
-                    <label>CHANTILY:</label>
+                    <label>COBERTURA (EXTERIOR):</label>
                     <select id="chantily-${p.id}" class="select-estilo" onchange="atualizarPrecoCard(${p.id})">
                         ${chantilys.map((c, i) => `<option value="${i}">${c.nome} ${c.preco > 0 ? '(+ R$' + c.preco.toFixed(2) + ')' : ''}</option>`).join('')}
                     </select>
@@ -1138,8 +1171,8 @@
                         ${bolos.map((b, index) => `<option value="${index}">${b.label}</option>`).join('')}
                     </select>
                     <label>MASSA:</label>
-                    <select id="massa-${p.id}" class="select-estilo">
-                        ${massas.map(m => `<option value="${m}">${m}</option>`).join('')}
+                    <select id="massa-${p.id}" class="select-estilo" disabled>
+                        <option value="Pão de ló">Pão de ló</option>
                     </select>
                     <label>RECHEIO:</label>
                     <select id="rec-${p.id}" class="select-estilo">
@@ -1153,6 +1186,35 @@
                 </div>
             `;
                         precoHTML = `<span id="preco-card-${p.id}">R$ ${bolos[0].preco.toFixed(2)}</span>`;
+                    }
+
+                    // OVOS DE PÁSCOA
+                    if (p.categoria === 'pascoa') {
+                        if (p.tipoPascoa === 'tradicional') {
+                            seletorHTML = `
+                <div class="opcoes-bolo">
+                    <label>TAMANHO:</label>
+                    <select id="pascoa-tam-${p.id}" class="select-estilo" onchange="atualizarPrecoCard(${p.id})">
+                        ${tamanhosPascoaTradicional.map((t, i) => `<option value="${i}">${t.label} - R$ ${t.preco.toFixed(2)}</option>`).join('')}
+                    </select>
+                </div>`;
+                            precoHTML = `<span id="preco-card-${p.id}">R$ ${tamanhosPascoaTradicional[0].preco.toFixed(2)}</span>`;
+                        } else if (p.tipoPascoa === 'colher') {
+                            seletorHTML = `
+                <div class="opcoes-bolo">
+                    <label>TAMANHO:</label>
+                    <select id="pascoa-tam-${p.id}" class="select-estilo" onchange="atualizarPrecoCard(${p.id})">
+                        ${tamanhosPascoaColher.map((t, i) => `<option value="${i}">${t.label} - R$ ${t.preco.toFixed(2)}</option>`).join('')}
+                    </select>
+                    <label>SABOR:</label>
+                    <select id="pascoa-sabor-${p.id}" class="select-estilo" onchange="mudarFotoSaborPascoa(${p.id})">
+                        ${saboresPascoa.map(s => `<option value="${s}">${s}</option>`).join('')}
+                    </select>
+                </div>`;
+                            precoHTML = `<span id="preco-card-${p.id}">R$ ${tamanhosPascoaColher[0].preco.toFixed(2)}</span>`;
+                        } else if (p.tipoPascoa === 'fatia') {
+                            precoHTML = `R$ ${p.preco.toFixed(2)}`;
+                        }
                     }
 
                     const cardClass = p.personalizado ? 'product-card card-destaque' : 'product-card';
@@ -1173,7 +1235,7 @@
 
             function atualizarPrecoCard(id) {
                 const p = produtos.find(x => x.id === id);
-                if (p && (p.categoria === 'bolos' || p.categoria === 'tra')) {
+                if (p && p.categoria === 'bolos') {
                     const selectBolo = document.getElementById(`select-bolo-${id}`);
                     const tamIdx = selectBolo ? selectBolo.value : 0;
                     const selectAdd = document.getElementById(`add-${id}`);
@@ -1183,7 +1245,6 @@
                     const addPreco = listAdd[addIdx] ? listAdd[addIdx].preco : 0;
                     let total = bolos[tamIdx].preco + addPreco;
 
-                    // Extras do bolo personalizado
                     if (p.personalizado) {
                         const selChantily = document.getElementById(`chantily-${id}`);
                         const chantilyIdx = selChantily ? selChantily.value : 0;
@@ -1196,6 +1257,14 @@
 
                     document.getElementById(`preco-card-${id}`).innerText = `R$ ${total.toFixed(2)}`;
                 }
+                // Preço Páscoa
+                if (p && p.categoria === 'pascoa') {
+                    const selTam = document.getElementById(`pascoa-tam-${id}`);
+                    const tamIdx = selTam ? parseInt(selTam.value) : 0;
+                    let lista = p.tipoPascoa === 'tradicional' ? tamanhosPascoaTradicional : tamanhosPascoaColher;
+                    const preco = lista[tamIdx] ? lista[tamIdx].preco : p.preco;
+                    document.getElementById(`preco-card-${id}`).innerText = `R$ ${preco.toFixed(2)}`;
+                }
             }
 
             // Armazena fotos base64 separadamente (não vai para localStorage)
@@ -1207,13 +1276,13 @@
 
                 let item = { ...prodOriginal };
 
-                if (item.categoria === 'bolos' || item.categoria === 'tra') {
+                if (item.categoria === 'bolos') {
                     const selectBolo = document.getElementById(`select-bolo-${id}`);
                     const tamIdx = selectBolo ? selectBolo.value : 0;
                     const selectRec = document.getElementById(`rec-${id}`);
                     const recVal = selectRec ? selectRec.value : 'Nenhum';
                     const selectMassa = document.getElementById(`massa-${id}`);
-                    const massaVal = selectMassa ? selectMassa.value : 'Nenhum';
+                    const massaVal = selectMassa ? selectMassa.value : 'Pão de ló';
                     const selectAdd = document.getElementById(`add-${id}`);
                     const addIdx = selectAdd ? selectAdd.value : 0;
 
@@ -1223,13 +1292,12 @@
                     item.preco = bolos[tamIdx].preco + addPreco;
                     let detalhes = `Tam: ${bolos[tamIdx].label} | Massa: ${massaVal} | Rech: ${recVal} | Add: ${listAdd[addIdx] ? listAdd[addIdx].nome : 'Nenhum'}`;
 
-                    // Extras do bolo personalizado
                     if (prodOriginal.personalizado) {
                         const selChantily = document.getElementById(`chantily-${id}`);
                         const chantilyIdx = selChantily ? selChantily.value : 0;
                         const chantilyPreco = chantilys[chantilyIdx] ? chantilys[chantilyIdx].preco : 0;
                         item.preco += chantilyPreco;
-                        detalhes += ` | Chantily: ${chantilys[chantilyIdx] ? chantilys[chantilyIdx].nome : 'Sem'}`;
+                        detalhes += ` | Cobertura/Ext: ${chantilys[chantilyIdx] ? chantilys[chantilyIdx].nome : 'Sem'}`;
 
                         const selTopo = document.getElementById(`topo-${id}`);
                         const topoIdx = selTopo ? selTopo.value : 0;
@@ -1247,7 +1315,6 @@
                         if (fotoInput && fotoInput.files && fotoInput.files.length > 0) {
                             const preview = document.getElementById(`foto-preview-${id}`);
                             if (preview && preview.src && preview.src.startsWith('data:')) {
-                                // Guardar base64 fora do carrinho (não salva no localStorage)
                                 const carrinhoIdx = carrinho.length;
                                 fotosReferencia[carrinhoIdx] = preview.src.split(',')[1];
                             }
@@ -1257,6 +1324,26 @@
 
                     item.detalhes = detalhes;
                     item.nome = item.nome;
+                    item.nome = item.nome;
+                }
+
+                // Ovos de Páscoa
+                if (item.categoria === 'pascoa') {
+                    if (item.tipoPascoa === 'tradicional') {
+                        const selTam = document.getElementById(`pascoa-tam-${id}`);
+                        const tamIdx = selTam ? parseInt(selTam.value) : 0;
+                        item.preco = tamanhosPascoaTradicional[tamIdx].preco;
+                        item.detalhes = `Tam: ${tamanhosPascoaTradicional[tamIdx].label}`;
+                    } else if (item.tipoPascoa === 'colher') {
+                        const selTam = document.getElementById(`pascoa-tam-${id}`);
+                        const tamIdx = selTam ? parseInt(selTam.value) : 0;
+                        const selSabor = document.getElementById(`pascoa-sabor-${id}`);
+                        const sabor = selSabor ? selSabor.value : saboresPascoa[0];
+                        item.preco = tamanhosPascoaColher[tamIdx].preco;
+                        item.detalhes = `Tam: ${tamanhosPascoaColher[tamIdx].label} | Sabor: ${sabor}`;
+                    } else if (item.tipoPascoa === 'fatia') {
+                        item.detalhes = `250g | Novidade 2026`;
+                    }
                 }
 
                 carrinho.push(item);
