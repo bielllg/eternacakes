@@ -1075,8 +1075,17 @@
                 { id: 53, nome: "Cento Docinho Cajuzinho", categoria: "doces", preco: 100.00, foto: "img.img/Cento Docinho Cajuzinho.jpg", desc: "100 unidades." },
 
                 { id: 60, nome: "Ovo Tradicional", categoria: "pascoa", preco: 35.90, foto: "img.img/39bf4afdef86d07154a995c82a131c16.jpg", desc: "Ovo de chocolate clássico.", tipoPascoa: 'tradicional' },
-                { id: 61, nome: "Ovo de Colher", categoria: "pascoa", preco: 28.90, foto: "img.img/343b7bf0b314fdca0b239a1ee506adc5.jpg", desc: "Muito recheio para comer de colher!", tipoPascoa: 'colher' },
+                { id: 61, nome: "Ovo de Colher Ninho / Nutella", categoria: "pascoa", preco: 28.90, foto: "img.img/343b7bf0b314fdca0b239a1ee506adc5.jpg", desc: "Muito recheio para comer de colher!", tipoPascoa: 'colher', saborColher: 'Ninho / Nutella' },
+                { id: 65, nome: "Ovo de Colher Beijinho / brownie", categoria: "pascoa", preco: 28.90, foto: "img.img/08ca1d51db10d10f585d6bcb62d09922.jpg", desc: "Muito recheio para comer de colher!", tipoPascoa: 'colher', saborColher: 'Beijinho / brownie' },
+                { id: 66, nome: "Ovo de Colher Maracujá / Morango", categoria: "pascoa", preco: 28.90, foto: "img.img/837b7e60662d95666bf4f300c7e4097d.jpg", desc: "Muito recheio para comer de colher!", tipoPascoa: 'colher', saborColher: 'Maracujá / Morango' },
+                { id: 67, nome: "Ovo de Colher Brigadeiro / Ganache", categoria: "pascoa", preco: 28.90, foto: "img.img/5576ad78eb5b7090f21c6e779f1671a8.jpg", desc: "Muito recheio para comer de colher!", tipoPascoa: 'colher', saborColher: 'Brigadeiro / Ganache' },
+                { id: 68, nome: "Ovo de Colher Orion e paçoca", categoria: "pascoa", preco: 28.90, foto: "img.img/d455b20e8b04b62b2ff4d1e6a595492d.jpg", desc: "Muito recheio para comer de colher!", tipoPascoa: 'colher', saborColher: 'Orion e paçoca' },
                 { id: 62, nome: "Ovo de Fatia 250g", categoria: "pascoa", preco: 95.90, foto: "img.img/926900edfca9b0cbc88ac5927de1aaf7.jpg", desc: " Novidade de 2026! Ovo de fatia 250g.", tipoPascoa: 'fatia' },
+                { id: 63, nome: "Barra Recheada", categoria: "pascoa", preco: 69.90, foto: "img.img/014a27cd39729b7e23e1cb844d7ac6fa.jpg", desc: "Barra de chocolate recheada!", tipoPascoa: 'barra' },
+                { id: 64, nome: "Ovos Infantis 50g", categoria: "pascoa", preco: 39.90, foto: "img.img/WhatsApp Image 2026-03-05 at 10.59.37.jpeg", desc: "🌟 Ovos de 50g decorados para a criançada!", tipoPascoa: 'infantil' },
+
+                { id: 90, nome: "🎁 COMBO: Barra Recheada + Tradicional 250g", categoria: "pascoa", preco: 100.00, foto: "img.img/014a27cd39729b7e23e1cb844d7ac6fa.jpg", desc: "Barra Recheada (qualquer sabor) + Ovo Tradicional 250g por apenas R$ 100!", tipoPascoa: 'combo1', personalizado: true },
+                { id: 91, nome: "🎁 COMBO: 3 Ovos Infantis 50g", categoria: "pascoa", preco: 100.00, foto: "img.img/WhatsApp Image 2026-03-05 at 10.59.37.jpeg", desc: "Leve 3 ovos infantis decorados de 50g por apenas R$ 100!", tipoPascoa: 'combo2', personalizado: true },
 
             ];
 
@@ -1206,14 +1215,37 @@
                     <select id="pascoa-tam-${p.id}" class="select-estilo" onchange="atualizarPrecoCard(${p.id})">
                         ${tamanhosPascoaColher.map((t, i) => `<option value="${i}">${t.label} - R$ ${t.preco.toFixed(2)}</option>`).join('')}
                     </select>
-                    <label>SABOR:</label>
-                    <select id="pascoa-sabor-${p.id}" class="select-estilo" onchange="mudarFotoSaborPascoa(${p.id})">
-                        ${saboresPascoa.map(s => `<option value="${s}">${s}</option>`).join('')}
-                    </select>
                 </div>`;
                             precoHTML = `<span id="preco-card-${p.id}">R$ ${tamanhosPascoaColher[0].preco.toFixed(2)}</span>`;
                         } else if (p.tipoPascoa === 'fatia') {
                             precoHTML = `R$ ${p.preco.toFixed(2)}`;
+                        } else if (p.tipoPascoa === 'barra') {
+                            seletorHTML = `
+                <div class="opcoes-bolo">
+                    <label>SABOR:</label>
+                    <select id="pascoa-sabor-${p.id}" class="select-estilo">
+                        ${saboresPascoa.map(s => `<option value="${s}">${s}</option>`).join('')}
+                    </select>
+                </div>`;
+                            precoHTML = `R$ ${p.preco.toFixed(2)}`;
+                        } else if (p.tipoPascoa === 'infantil') {
+                            precoHTML = `R$ ${p.preco.toFixed(2)}`;
+                        } else if (p.tipoPascoa === 'combo1') {
+                            seletorHTML = `
+                <div class="opcoes-bolo">
+                    <label>🍫 SABOR DA BARRA RECHEADA:</label>
+                    <select id="combo-sabor-${p.id}" class="select-estilo">
+                        ${saboresPascoa.map(s => `<option value="${s}">${s}</option>`).join('')}
+                    </select>
+                    <p style="font-size:0.85rem; color: var(--rose); margin-top:6px;"><strong>+ Ovo Tradicional 250g incluído!</strong></p>
+                </div>`;
+                            precoHTML = `<span style="text-decoration:line-through; opacity:0.5; font-size:0.85rem;">R$ 112,80</span> <span style="color: #28a745; font-weight:bold;">R$ 100,00</span>`;
+                        } else if (p.tipoPascoa === 'combo2') {
+                            seletorHTML = `
+                <div class="opcoes-bolo">
+                    <p style="font-size:0.85rem; color: var(--rose);"><strong>3 ovos infantis decorados de 50g</strong></p>
+                </div>`;
+                            precoHTML = `<span style="text-decoration:line-through; opacity:0.5; font-size:0.85rem;">R$ 119,70</span> <span style="color: #28a745; font-weight:bold;">R$ 100,00</span>`;
                         }
                     }
 
@@ -1337,12 +1369,22 @@
                     } else if (item.tipoPascoa === 'colher') {
                         const selTam = document.getElementById(`pascoa-tam-${id}`);
                         const tamIdx = selTam ? parseInt(selTam.value) : 0;
-                        const selSabor = document.getElementById(`pascoa-sabor-${id}`);
-                        const sabor = selSabor ? selSabor.value : saboresPascoa[0];
                         item.preco = tamanhosPascoaColher[tamIdx].preco;
-                        item.detalhes = `Tam: ${tamanhosPascoaColher[tamIdx].label} | Sabor: ${sabor}`;
+                        item.detalhes = `Tam: ${tamanhosPascoaColher[tamIdx].label} | Sabor: ${item.saborColher}`;
                     } else if (item.tipoPascoa === 'fatia') {
                         item.detalhes = `250g | Novidade 2026`;
+                    } else if (item.tipoPascoa === 'barra') {
+                        const selSabor = document.getElementById(`pascoa-sabor-${id}`);
+                        const sabor = selSabor ? selSabor.value : saboresPascoa[0];
+                        item.detalhes = `Sabor: ${sabor}`;
+                    } else if (item.tipoPascoa === 'infantil') {
+                        item.detalhes = `50g decorado`;
+                    } else if (item.tipoPascoa === 'combo1') {
+                        const selSabor = document.getElementById(`combo-sabor-${id}`);
+                        const sabor = selSabor ? selSabor.value : saboresPascoa[0];
+                        item.detalhes = `Barra Recheada (${sabor}) + Ovo Tradicional 250g | COMBO`;
+                    } else if (item.tipoPascoa === 'combo2') {
+                        item.detalhes = `3x Ovos Infantis 50g decorados | COMBO`;
                     }
                 }
 
