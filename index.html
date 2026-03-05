@@ -1368,39 +1368,31 @@
                     }
                 }
 
-                // Tentar Web Share API (funciona no celular — envia a foto direto!)
+                // Se tem foto e o celular suporta compartilhamento de arquivos
                 if (fotoBase64 && navigator.canShare) {
-                    try {
-                        const file = base64ToFile(fotoBase64, 'referencia-bolo.jpg');
-                        const shareData = {
-                            text: texto,
-                            files: [file]
-                        };
-                        if (navigator.canShare(shareData)) {
-                            const btn = document.querySelector('.btn-primary.w-100[onclick="finalizarPedido()"]');
-                            if (btn) {
-                                btn.innerText = '📸 Preparando...';
-                                btn.disabled = true;
+                    const file = base64ToFile(fotoBase64, 'referencia-bolo.jpg');
+                    const shareData = { files: [file] };
+
+                    if (navigator.canShare(shareData)) {
+                        texto += `\n\n📸 *Foto de referência do bolo será enviada em seguida!*`;
+
+                        // Passo 1: Abre WhatsApp com o texto do pedido
+                        window.open(`https://wa.me/553180254312?text=${encodeURIComponent(texto)}`);
+
+                        // Passo 2: Após um breve delay, abre o compartilhamento da foto
+                        setTimeout(async () => {
+                            try {
+                                alert('📸 Agora envie a foto de referência do bolo!\nSelecione o WhatsApp na próxima tela.');
+                                await navigator.share(shareData);
+                            } catch (e) {
+                                console.log('Compartilhamento cancelado.');
                             }
-                            await navigator.share(shareData);
-                            if (btn) {
-                                btn.innerText = 'Finalizar no WhatsApp';
-                                btn.disabled = false;
-                            }
-                            return; // Compartilhou com sucesso, não precisa do fallback
-                        }
-                    } catch (e) {
-                        // Usuário cancelou ou erro — continuar com fallback
-                        console.log('Web Share cancelado ou não suportado, usando fallback.');
-                        const btn = document.querySelector('.btn-primary.w-100[onclick="finalizarPedido()"]');
-                        if (btn) {
-                            btn.innerText = 'Finalizar no WhatsApp';
-                            btn.disabled = false;
-                        }
+                        }, 1500);
+                        return;
                     }
                 }
 
-                // Fallback: Upload para ImgBB + link no WhatsApp
+                // Fallback para desktop: Upload para ImgBB + link no WhatsApp
                 if (fotoBase64) {
                     const btn = document.querySelector('.btn-primary.w-100[onclick="finalizarPedido()"]');
                     if (btn) {
