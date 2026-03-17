@@ -1080,9 +1080,10 @@
                 { id: 66, nome: "Ovo de Colher Maracujá / Morango", categoria: "pascoa", preco: 28.90, foto: "img.img/837b7e60662d95666bf4f300c7e4097d.jpg", desc: "Muito recheio para comer de colher!", tipoPascoa: 'colher', saborColher: 'Maracujá / Morango' },
                 { id: 67, nome: "Ovo de Colher Brigadeiro / Ganache", categoria: "pascoa", preco: 28.90, foto: "img.img/5576ad78eb5b7090f21c6e779f1671a8.jpg", desc: "Muito recheio para comer de colher!", tipoPascoa: 'colher', saborColher: 'Brigadeiro / Ganache' },
                 { id: 68, nome: "Ovo de Colher Orion e paçoca", categoria: "pascoa", preco: 28.90, foto: "img.img/d455b20e8b04b62b2ff4d1e6a595492d.jpg", desc: "Muito recheio para comer de colher!", tipoPascoa: 'colher', saborColher: 'Orion e paçoca' },
-                { id: 62, nome: "Ovo de Fatia 250g", categoria: "pascoa", preco: 95.90, foto: "img.img/926900edfca9b0cbc88ac5927de1aaf7.jpg", desc: " Novidade de 2026! Ovo de fatia 250g.", tipoPascoa: 'fatia' },
+                { id: 62, nome: "Ovo de Fatia 250g", categoria: "pascoa", preco: 169.90, foto: "img.img/926900edfca9b0cbc88ac5927de1aaf7.jpg", desc: " Novidade de 2026! Ovo de fatia 250g.", tipoPascoa: 'fatia' },
                 { id: 63, nome: "Barra Recheada", categoria: "pascoa", preco: 69.90, foto: "img.img/014a27cd39729b7e23e1cb844d7ac6fa.jpg", desc: "Barra de chocolate recheada!", tipoPascoa: 'barra' },
                 { id: 64, nome: "Ovos Infantis 50g", categoria: "pascoa", preco: 39.90, foto: "img.img/WhatsApp Image 2026-03-05 at 10.59.37.jpeg", desc: "🌟 Ovos de 50g decorados para a criançada!", tipoPascoa: 'infantil' },
+                { id: 95, nome: "Ovo Trufado", categoria: "pascoa", preco: 39.90, foto: "img.img/Ovo Trufado.jpg", desc: "Delicioso ovo de chocolate trufado.", tipoPascoa: 'trufado' },
 
                 { id: 90, nome: "🎁 COMBO: Barra Recheada + Tradicional 250g", categoria: "pascoa", preco: 100.00, foto: "img.img/014a27cd39729b7e23e1cb844d7ac6fa.jpg", desc: "Barra Recheada (qualquer sabor) + Ovo Tradicional 250g por apenas R$ 100!", tipoPascoa: 'combo1', personalizado: true },
                 { id: 91, nome: "🎁 COMBO: 3 Ovos Infantis 50g", categoria: "pascoa", preco: 100.00, foto: "img.img/WhatsApp Image 2026-03-05 at 10.59.37.jpeg", desc: "Leve 3 ovos infantis decorados de 50g por apenas R$ 100!", tipoPascoa: 'combo2', personalizado: true },
@@ -1090,17 +1091,26 @@
             ];
 
             const tamanhosPascoaTradicional = [
-                { label: "150g", preco: 35.90 },
-                { label: "250g", preco: 42.90 },
-                { label: "350g", preco: 53.90 },
-                { label: "500g", preco: 79.90 }
+                { label: "50g", preco: 29.90 },
+                { label: "150g", preco: 39.90 },
+                { label: "250g", preco: 49.90 },
+                { label: "350g", preco: 59.90 },
+                { label: "500g", preco: 89.90 }
+            ];
+
+            const tamanhosPascoaTrufado = [
+                { label: "50g", preco: 39.90 },
+                { label: "150g", preco: 59.90 },
+                { label: "250g", preco: 79.90 },
+                { label: "350g", preco: 89.90 },
+                { label: "500g", preco: 129.90 }
             ];
 
             const tamanhosPascoaColher = [
-                { label: "50g", preco: 28.90 },
-                { label: "150g", preco: 39.90 },
-                { label: "250g", preco: 49.90 },
-                { label: "350g", preco: 69.90 }
+                { label: "50g", preco: 39.90 },
+                { label: "150g", preco: 69.90 },
+                { label: "250g", preco: 89.90 },
+                { label: "350g", preco: 99.90 }
             ];
 
             const saboresPascoa = [
@@ -1217,6 +1227,15 @@
                     </select>
                 </div>`;
                             precoHTML = `<span id="preco-card-${p.id}">R$ ${tamanhosPascoaColher[0].preco.toFixed(2)}</span>`;
+                        } else if (p.tipoPascoa === 'trufado') {
+                            seletorHTML = `
+                <div class="opcoes-bolo">
+                    <label>TAMANHO:</label>
+                    <select id="pascoa-tam-${p.id}" class="select-estilo" onchange="atualizarPrecoCard(${p.id})">
+                        ${tamanhosPascoaTrufado.map((t, i) => `<option value="${i}">${t.label} - R$ ${t.preco.toFixed(2)}</option>`).join('')}
+                    </select>
+                </div>`;
+                            precoHTML = `<span id="preco-card-${p.id}">R$ ${tamanhosPascoaTrufado[0].preco.toFixed(2)}</span>`;
                         } else if (p.tipoPascoa === 'fatia') {
                             precoHTML = `R$ ${p.preco.toFixed(2)}`;
                         } else if (p.tipoPascoa === 'barra') {
@@ -1291,11 +1310,16 @@
                 }
                 // Preço Páscoa
                 if (p && p.categoria === 'pascoa') {
-                    const selTam = document.getElementById(`pascoa-tam-${id}`);
-                    const tamIdx = selTam ? parseInt(selTam.value) : 0;
-                    let lista = p.tipoPascoa === 'tradicional' ? tamanhosPascoaTradicional : tamanhosPascoaColher;
-                    const preco = lista[tamIdx] ? lista[tamIdx].preco : p.preco;
-                    document.getElementById(`preco-card-${id}`).innerText = `R$ ${preco.toFixed(2)}`;
+                    if (p.tipoPascoa === 'tradicional' || p.tipoPascoa === 'colher' || p.tipoPascoa === 'trufado') {
+                        const selTam = document.getElementById(`pascoa-tam-${id}`);
+                        const tamIdx = selTam ? parseInt(selTam.value) : 0;
+                        let lista = p.tipoPascoa === 'tradicional' ? tamanhosPascoaTradicional :
+                            (p.tipoPascoa === 'colher' ? tamanhosPascoaColher : tamanhosPascoaTrufado);
+                        const preco = lista[tamIdx] ? lista[tamIdx].preco : p.preco;
+                        document.getElementById(`preco-card-${id}`).innerText = `R$ ${preco.toFixed(2)}`;
+                    } else if (p.tipoPascoa === 'combo1') {
+                        document.getElementById(`preco-card-${id}`).innerText = `R$ 100.00`;
+                    }
                 }
             }
 
@@ -1371,6 +1395,11 @@
                         const tamIdx = selTam ? parseInt(selTam.value) : 0;
                         item.preco = tamanhosPascoaColher[tamIdx].preco;
                         item.detalhes = `Tam: ${tamanhosPascoaColher[tamIdx].label} | Sabor: ${item.saborColher}`;
+                    } else if (item.tipoPascoa === 'trufado') {
+                        const selTam = document.getElementById(`pascoa-tam-${id}`);
+                        const tamIdx = selTam ? parseInt(selTam.value) : 0;
+                        item.preco = tamanhosPascoaTrufado[tamIdx].preco;
+                        item.detalhes = `Tam: ${tamanhosPascoaTrufado[tamIdx].label}`;
                     } else if (item.tipoPascoa === 'fatia') {
                         item.detalhes = `250g | Novidade 2026`;
                     } else if (item.tipoPascoa === 'barra') {
